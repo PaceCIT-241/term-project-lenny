@@ -1,0 +1,48 @@
+CREATE TABLE WeatherStation (
+    station_id INT PRIMARY KEY AUTO_INCREMENT,
+    station_name VARCHAR(100),
+    city VARCHAR(100),
+    country VARCHAR(100)
+);
+
+INSERT INTO WeatherStation
+(station_id, station_name, city, country)
+VALUES ('725037', 'White Plains, Westchester County Airport', 'White Plains', 'United States');
+
+SELECT * FROM WeatherStation;
+
+CREATE TABLE ClimateRecord (
+    record_id INT PRIMARY KEY AUTO_INCREMENT,
+    station_id INT,
+    record_year INT,
+    avg_temperature DECIMAL(5,2),
+    avg_max_temperature DECIMAL(5,2),
+    avg_min_temperature DECIMAL(5,2),
+    precipitation DECIMAL(8,2),
+    rainy_days INT,
+    snow_days INT,
+    
+    FOREIGN KEY (station_id)
+    REFERENCES WeatherStation(station_id)
+);
+
+SELECT * FROM ClimateRecord LIMIT 100;
+
+
+LOAD DATA LOCAL INFILE '/mnt/chromeos/MyFiles/Downloads/climate - white plains - Sheet1 (5).csv'
+INTO TABLE ClimateRecord
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(
+    record_year,
+    station_id,
+    avg_temperature,
+    avg_max_temperature,
+    avg_min_temperature,
+    @precipitation,
+    rainy_days,
+    snow_days
+)
+SET precipitation = NULLIF(@precipitation, '');
+

@@ -1,0 +1,8 @@
+SELECT
+    AVG(avg_temperature) AS overall_avg_temperature,
+    AVG(avg_max_temperature) AS overall_avg_max_temperature,
+    AVG(avg_min_temperature) AS overall_avg_min_temperature,
+    AVG(precipitation) AS average_precipitation,
+    AVG(rainy_days) AS average_rainy_days,
+    AVG(snow_days) AS average_snow_days
+FROM ClimateRecord;

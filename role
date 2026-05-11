@@ -1,0 +1,16 @@
+CREATE ROLE climate_reader; 
+
+GRANT SELECT ON ClimateRecord TO climate_reader;
+GRANT SELECT ON WeatherStation TO climate_reader;
+
+CREATE USER 'student1'@'localhost'
+IDENTIFIED BY 'password123';
+
+CREATE USER 'student2'@'localhost'
+IDENTIFIED BY 'password123';
+
+GRANT climate_reader TO 'student1'@'localhost';
+
+GRANT climate_reader TO 'student2'@'localhost';
+
+SHOW GRANTS FOR 'student'@'localhost';
