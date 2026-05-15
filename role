@@ -13,4 +13,5 @@ GRANT climate_reader TO 'student1'@'localhost';
 
 GRANT climate_reader TO 'student2'@'localhost';
 
+
 SHOW GRANTS FOR 'student'@'localhost';

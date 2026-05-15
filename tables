@@ -28,6 +28,35 @@ CREATE TABLE ClimateRecord (
 
 SELECT * FROM ClimateRecord LIMIT 100;
 
+CREATE TABLE ClimateCategory (
+    category_id INT PRIMARY KEY AUTO_INCREMENT,
+    category_name VARCHAR(50),
+    description VARCHAR(100)
+);
+
+SELECT * FROM ClimateCategory;
+
+INSERT INTO ClimateCategory
+(category_name, description)
+VALUES
+('Cold', 'Below average temperatures'),
+('Moderate', 'Average climate conditions'),
+('Hot', 'Above average temperatures');
+
+ALTER TABLE ClimateRecord
+ADD category_id INT;
+
+ALTER TABLE ClimateRecord
+ADD FOREIGN KEY (category_id)
+REFERENCES ClimateCategory(category_id);
+
+UPDATE ClimateRecord SET category_id = 1 WHERE avg_max_temperature < 8;
+
+UPDATE ClimateRecord SET category_id = 2 WHERE avg_max_temperature BETWEEN 8 AND 16;
+
+UPDATE ClimateRecord SET category_id = 3 WHERE avg_max_temperature > 16;
+
+
 
 LOAD DATA LOCAL INFILE '/mnt/chromeos/MyFiles/Downloads/climate - white plains - Sheet1 (5).csv'
 INTO TABLE ClimateRecord

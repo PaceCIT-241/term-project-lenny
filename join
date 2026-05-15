@@ -1,10 +1,5 @@
 SELECT
-    ws.station_name,
-    ws.city,
-    ws.country,
     cr.record_year,
-    cr.avg_temperature,
-    cr.precipitation,
-    cr.rainy_days,
-    cr.snow_days
-FROM ClimateRecord cr JOIN WeatherStation ws ON cr.station_id = ws.station_id LIMIT 100;
+    cr.avg_max_temperature,
+    cc.category_name
+FROM ClimateRecord cr JOIN ClimateCategory cc ON cr.category_id = cc.category_id;
