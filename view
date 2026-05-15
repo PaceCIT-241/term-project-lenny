@@ -1,13 +1,15 @@
-CREATE VIEW ClimateSummary AS SELECT
+CREATE VIEW ClimateSummary AS
+SELECT
     cr.record_year,
     ws.station_name,
-    ws.country,
+    cc.category_name,
     cr.avg_temperature,
     cr.avg_max_temperature,
     cr.avg_min_temperature,
-    cr.precipitation,
-    cr.rainy_days,
-    cr.snow_days
-FROM ClimateRecord cr JOIN WeatherStation ws ON cr.station_id = ws.station_id;
+    cr.precipitation
+FROM ClimateRecord cr JOIN WeatherStation ws ON cr.station_id = ws.station_id
+JOIN ClimateCategory cc ON cr.category_id = cc.category_id;
+
+DROP VIEW ClimateSummary;
 
 SELECT * FROM ClimateSummary;
